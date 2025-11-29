@@ -5,7 +5,7 @@ date:   2025-11-29 18:19:00 +0100
 categories: archives
 ---
 
-La première version du guide sur la mise en oeuvre de la norme RiC vient d'être publié : https://ica-egad.github.io/RiC-AG/.
+La première version du guide sur la mise en oeuvre de la norme RiC vient d'être publié : [https://ica-egad.github.io/RiC-AG/](https://ica-egad.github.io/RiC-AG/).
 
 Pour rappel, la norme RiC s'articule en quatre parties :
 - [RiC-FAD](https://www.ica.org/fr/resource/records-in-contexts-foundations-of-archival-description/) : *Foundations of Archival Description*, brève introduction

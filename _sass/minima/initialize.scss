@@ -37,6 +37,12 @@ $on-large:         $on-laptop !default;
   }
 }
 
+@media (max-width: 768px) {
+  .nav-calendrier {
+    display: none;
+  }
+}
+
 @mixin relative-font-size($ratio) {
   font-size: #{$ratio}rem;
 }
