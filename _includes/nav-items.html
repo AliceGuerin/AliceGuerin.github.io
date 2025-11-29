@@ -2,15 +2,13 @@
   {%- for path in include.paths -%}
     {%- assign hyperpage = site.pages | where: "path", path | first -%}
     {%- if hyperpage.title %}
-      {%- if hyperpage.title == "Calendrier" -%}
-        <a class="nav-item nav-calendrier" href="{{ hyperpage.url | relative_url }}">
-          {{ hyperpage.title | escape }}
-        </a>
-      {%- else -%}
-        <a class="nav-item" href="{{ hyperpage.url | relative_url }}">
-          {{ hyperpage.title | escape }}
-        </a>
-      {%- endif -%}
+
+      {%- assign is_calendar = hyperpage.url contains "calendrier" -%}
+      <a class="nav-item{% if is_calendar %} nav-calendrier{% endif %}" 
+         href="{{ hyperpage.url | relative_url }}">
+         {{ hyperpage.title | escape }}
+      </a>
+
     {%- endif -%}
   {%- endfor %}
 </div>

@@ -1,7 +1,12 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
 ---
 
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
   "minima/initialize";
+
+@media (max-width: 768px) {
+  .nav-calendrier {
+    display: none !important;
+  }
+}
