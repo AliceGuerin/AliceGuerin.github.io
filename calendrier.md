@@ -114,5 +114,3 @@ description: Évènements divers en rapport avec les archives.
 
 })();
 </script>
-
-<p style="padding-top:2%">Ce calendrier regroupe les différents évènements en liens avec les archives.</p>
