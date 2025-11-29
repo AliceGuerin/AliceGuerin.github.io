@@ -4,7 +4,7 @@ title: Calendrier
 description: Évènements divers en rapport avec les archives.
 ---
 
-<div id="calendar"></div>
+<div id="calendar" style="max-width: 1200px"></div>
 
 <!-- Fenêtre modale -->
 <div id="eventModal" class="modal" style="display:none;">
