@@ -62,6 +62,14 @@ description: Évènements divers en rapport avec les archives.
     };
   });
 
+  function updateCalendarView(calendar) {
+    if (window.innerWidth < 768) {
+      calendar.changeView("dayGridMonth");
+    } else {
+      calendar.changeView("dayGridDay");
+    }
+  }
+
   // Initialisation du calendrier
   const calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
     locale: "fr",
