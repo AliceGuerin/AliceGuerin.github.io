@@ -4,8 +4,10 @@ title: Calendrier
 description: Évènements divers en rapport avec les archives.
 ---
 
+<div id="calendar"></div>
+
 <!-- Fenêtre modale -->
-<div id="eventModal" class="modal">
+<div id="eventModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span id="modalClose" class="modal-close">&times;</span>
     <h2 id="modalTitle"></h2>
@@ -13,10 +15,6 @@ description: Évènements divers en rapport avec les archives.
     <p id="modalDescription"></p>
   </div>
 </div>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.10/index.global.min.css">
-<div id="calendar" style="max-width: 900px; margin: 2rem auto;"></div>
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales/fr.global.min.js'></script>
@@ -26,36 +24,32 @@ description: Évènements divers en rapport avec les archives.
 <script>
 (async function() {
 
-  const icsUrl = "https://calendar.proton.me/api/calendar/v1/url/euCrRpLMkrVs1gyzq-Ec9Wv6MzZYpXpMCLnGGsOcJLIGXXNVGXf0tUEwqoa9ULqNKodh776gXXXZiBRu9-s-nQ==/calendar.ics?CacheKey=nCcl_qC6YEfpt1-h_Y2M6A%3D%3D&PassphraseKey=PY7nGHxgX08V0Y0CJW77tIcJrGj0EQPFZWX55QJFYKI%3D";
-
-  let text;
-  try {
-    const response = await fetch(icsUrl);
-    text = await response.text();
-  } catch (e) {
-    console.error("Erreur de chargement ICS :", e);
-    return;
+  // Fonction pour charger et parser le fichier ICS
+  async function loadICal(url) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Impossible de charger l’ICS : " + response.status);
+    const text = await response.text();
+    return ICAL.parse(text); // retourne l'objet jCal
   }
 
-  let jcalData, comp;
+  let jcalData, comp, vevents;
   try {
-    jcalData = ICAL.parse(text);
+    jcalData = await loadICal("/Archives-2025-11-29.ics"); // chemin ICS dans le repo
     comp = new ICAL.Component(jcalData);
+    vevents = comp.getAllSubcomponents("vevent");
   } catch (e) {
-    console.error("Erreur de parsing ICS :", e);
+    console.error("Erreur de chargement ou parsing ICS :", e);
     return;
   }
 
-  const vevents = comp.getAllSubcomponents("vevent");
-
+  // Conversion des événements en format FullCalendar
   const events = vevents.map(v => {
     const wrapped = new ICAL.Event(v);
 
-    // Méthode sécurisée : récupère la description complète peu importe la structure
     let description = "";
     try {
       description = v.getFirstPropertyValue("description") || "";
-    } catch (e) {
+    } catch(e) {
       console.warn("Impossible de lire DESCRIPTION pour l’événement :", wrapped.summary);
     }
 
@@ -64,12 +58,11 @@ description: Évènements divers en rapport avec les archives.
       start: wrapped.startDate.toJSDate(),
       end: wrapped.endDate.toJSDate(),
       allDay: wrapped.startDate.isDate,
-      extendedProps: {
-        description: description
-      }
+      extendedProps: { description }
     };
   });
 
+  // Initialisation du calendrier
   const calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
     locale: "fr",
     firstDay: 1,
@@ -83,51 +76,44 @@ description: Évènements divers en rapport avec les archives.
 
     eventClick(info) {
       const modal = document.getElementById("eventModal");
-        const modalTitle = document.getElementById("modalTitle");
-        const modalTime = document.getElementById("modalTime");
-        const modalDesc = document.getElementById("modalDescription");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalTime = document.getElementById("modalTime");
+      const modalDesc = document.getElementById("modalDescription");
 
-        const start = info.event.start;
-        const end = info.event.end;
+      const start = info.event.start;
+      const end = info.event.end;
 
-        function formatDateTime(date) {
-            if (!date) return "";
-            // Si l’heure est 00:00 et que les minutes sont 0 → événement "toute la journée"
-            if (date.getHours() === 0 && date.getMinutes() === 0) {
-                return date.toLocaleDateString("fr", { dateStyle: "long" });
-            }
-            // Sinon, afficher date + heure
-            return date.toLocaleString("fr", { dateStyle: "long", timeStyle: "short" });
-            }
-
-        // Utilisation
-        const startStr = formatDateTime(start);
-        const endStr   = formatDateTime(end);
-
-        modalTitle.textContent = info.event.title;
-        modalTime.textContent = startStr + " – " + endStr;
-        modalDesc.textContent = info.event.extendedProps.description || "";
-
-        modal.style.display = "block";
+      // Fonction pour afficher date ou date+heure selon allDay
+      function formatDateTime(date) {
+        if (!date) return "";
+        if (date.getHours() === 0 && date.getMinutes() === 0) {
+          return date.toLocaleDateString("fr", { dateStyle: "long" });
         }
-    });
+        return date.toLocaleString("fr", { dateStyle: "long", timeStyle: "short" });
+      }
 
-    calendar.render();
+      const startStr = formatDateTime(start);
+      const endStr   = formatDateTime(end);
 
-    const modal = document.getElementById("eventModal");
-    const closeBtn = document.getElementById("modalClose");
+      modalTitle.textContent = info.event.title;
+      modalTime.textContent = startStr + " – " + endStr;
+      modalDesc.textContent = info.event.extendedProps.description || "";
 
-    closeBtn.onclick = function () {
-    modal.style.display = "none";
-    };
-
-    window.onclick = function (event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
+      modal.style.display = "block";
     }
-    };
+  });
+
+  calendar.render();
+
+  // Gestion de la fermeture de la modale
+  const modal = document.getElementById("eventModal");
+  const closeBtn = document.getElementById("modalClose");
+
+  closeBtn.onclick = function () { modal.style.display = "none"; };
+  window.onclick = function (event) { if (event.target === modal) modal.style.display = "none"; };
 
 })();
 </script>
+
 
 Ce calendrier regroupe les différents évènements en liens avec les archives.

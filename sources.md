@@ -15,6 +15,8 @@ Infolettres :
 - ICARUS
 - IIPC
 - Thinking records
+- iPRES
+- Digital Cleanup Day
 
 Flux RSS :
 - Archiveilleurs
