@@ -70,7 +70,7 @@ description: Évènements divers en rapport avec les archives.
     headerToolbar: {
       left: "prev,next today",
       center: "title",
-      right: "dayGridMonth"
+      right: "timeGridWeek,dayGridMonth,multiMonthYear"
     },
     events: events,
 
@@ -115,5 +115,4 @@ description: Évènements divers en rapport avec les archives.
 })();
 </script>
 
-
-Ce calendrier regroupe les différents évènements en liens avec les archives.
+<p style="padding-top:2%">Ce calendrier regroupe les différents évènements en liens avec les archives.</p>
