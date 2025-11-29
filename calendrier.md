@@ -111,7 +111,14 @@ description: Évènements divers en rapport avec les archives.
     }
   });
 
+  updateCalendarView(calendar);
+
   calendar.render();
+
+  // Mise à jour lorsque la fenêtre change de taille
+  window.addEventListener("resize", function() {
+    updateCalendarView(calendar);
+  });
 
   // Gestion de la fermeture de la modale
   const modal = document.getElementById("eventModal");
