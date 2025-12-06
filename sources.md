@@ -17,6 +17,7 @@ Infolettres :
 - [Thinking records](https://thinkingrecords.co.uk/)
 - [iPRES](https://ipres-conference.org/)
 - [Digital Cleanup Day](https://digital-cleanup-day.fr/)
+- [AI4LAM](https://sites.google.com/view/ai4lam/home?)
 
 Flux RSS :
 - [Archiveilleurs](http://archiveilleurs.org/)
