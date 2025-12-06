@@ -20,4 +20,3 @@ Liens complémentaires sur le sujet des dossiers médicaux :
     - [Conservation du dossier médical](https://francearchives.gouv.fr/fr/circulaire/DPACI_RES_2007_014)
     - [Durée d'utilité administrative particulière à certains dossiers individuels médicaux constitués par la médecine du travail](https://francearchives.gouv.fr/fr/circulaire/DPACI_RES_2007_008)
     - [Hôpitaux. Conservation du dossier médical](https://francearchives.gouv.fr/fr/circulaire/DPACI_RES_2007_001)
-- 
