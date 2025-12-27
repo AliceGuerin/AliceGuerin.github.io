@@ -6,7 +6,7 @@ description: Personnes, blogs, et sites que je suis.
 
 Infolettres :
 - [liste AAF](https://www.archivistes.org/la-liste-archives-fr/)
-- [Archimag](https://www.archimag.com/) (Newsletter hebdomadaire, l'archiviste augmenté)
+- [Archimag](https://www.archimag.com/) (Newsletter hebdomadaire, L'archiviste augmenté, Le brief de l'IT)
 - [Archifiltre](https://archifiltre.fabrique.social.gouv.fr/archifiltre-doc/)
 - [Archives en France](https://francearchives.gouv.fr/fr/lettre-info)
 - [eFutura](https://www.efutura.fr/)
@@ -18,6 +18,7 @@ Infolettres :
 - [iPRES](https://ipres-conference.org/)
 - [Digital Cleanup Day](https://digital-cleanup-day.fr/)
 - [AI4LAM](https://sites.google.com/view/ai4lam/home?)
+- [Archifiltre](https://archifiltre.fabrique.social.gouv.fr/)
 
 Flux RSS :
 - [Archiveilleurs](http://archiveilleurs.org/)
@@ -28,6 +29,7 @@ Flux RSS :
 - [Le blog de Marie-Anne Chabin](https://www.marieannechabin.fr/)
 - [Modernisation et archives](https://siaf.hypotheses.org/)
 - [Droit(s) et archives](https://siafdroit.hypotheses.org/)
+- [Nouvelles archivistiques francophones](https://www.piaf-archives.org/nouvelles-archivistiques-francophones)
 
 Surveillance de màj :
 - [Pappers politiques](https://politique.pappers.fr/recherche?q=archives) (mot-clef archives)
