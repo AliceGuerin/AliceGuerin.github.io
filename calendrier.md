@@ -34,7 +34,7 @@ description: Évènements divers en rapport avec les archives.
 
   let jcalData, comp, vevents;
   try {
-    jcalData = await loadICal("/Archives-2025-12-06.ics"); // chemin ICS dans le repo
+    jcalData = await loadICal("/Archives.ics"); // chemin ICS dans le repo
     comp = new ICAL.Component(jcalData);
     vevents = comp.getAllSubcomponents("vevent");
   } catch (e) {
